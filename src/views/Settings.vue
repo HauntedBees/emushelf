@@ -578,7 +578,7 @@ export default class Settings extends Vue {
                 this.$router.push("/");
             } else {
                 switch(this.navSubstate) {
-                    case 2:
+                    case 3:
                         this.$emit("err", this.$t("gpEmuMouseOnly"));
                         break;
                     case 5:

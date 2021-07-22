@@ -76,7 +76,7 @@ export function MakeUpTheme(name: string, fonts: FontList): ThemeInfo {
     };
 }
 
-export function OpenDaisywheel(component: Vue, refName: string, labelKey: string, value: string, closeCallback: (s: string) => void, editCallback?: (s: string) => void) {
+export function OpenDaisywheel(component: Vue, refName: string, labelKey: string, value: string, closeCallback: (s: string) => void, editCallback?: (s: string) => void): void {
     TunnelEmit(component, "wheel", {
         open: true,
         el: ((component.$refs[refName] as Vue).$el) as HTMLInputElement,

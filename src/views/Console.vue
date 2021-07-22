@@ -238,7 +238,7 @@ export default class Console extends Vue {
             if(this.navSubstate === 0) { // search
                 this.inSearchWheel = true;
                 OpenDaisywheel(this, "search", "consoleSearchDW", this.searchquery, s => {
-                    this.searchquery = "s";
+                    this.searchquery = s;
                     this.SortAndFilterGames();
                     this.inSearchWheel = false;
                 }, s => {
