@@ -925,6 +925,7 @@ export default class Settings extends Vue {
     UpdateConfig(): void {
         if(!this.configInfo) { return; }
         const oldConfig: ConfigInfo = config.GetConfig();
+        this.configInfo.giantBombAPIKey = (this.configInfo.giantBombAPIKey || "").trim();
         config.UpdateConfig(this.configInfo);
         if(this.configInfo.fullscreen !== oldConfig.fullscreen) {
             SetFullScreen(this.configInfo.fullscreen);
