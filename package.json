@@ -2,7 +2,7 @@
   "name": "emushelf",
   "author": "Haunted Bees Productions",
   "description": "A middle-of-the-road game launcher.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",

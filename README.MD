@@ -26,7 +26,7 @@ EmuShelf is licensed under the [GNU Affero General Public License](https://www.g
 
 # Want to Help?
 
-Adding more recognized emulators to the list is probably the highest priority, so if you know of any emulators not listed in `/src/models/KnownEmulators.ts`, definitely add them and their command-line launch arguments! Emulators for any OS are welcome, but currently the only official releases of EmuShelf are for GNU/Linux and Windows, so those are the slightly higher priorities. 
+Adding more recognized emulators to the list is probably the highest priority, so if you know of any emulators not listed in `/src/models/KnownEmulators.ts`, definitely add them and their command-line launch arguments! Emulators for any OS are welcome, but currently the only official releases of EmuShelf are for GNU/Linux and Windows, so those are the slightly higher priorities. Also, any consoles not in `src/models/DefaultConsoles.ts` are welcome, too!
 
 If you want to translate this into another language, also definitely appreciated! The `/src/locales` folder contains all current translations which, as of this writing, are just English and like a tenth of Spanish, which is why there is no way to choose your language in the program itself yet, but the `language` value in `config.json` can be updated manually to switch languages.
 
