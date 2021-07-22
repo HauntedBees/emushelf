@@ -572,7 +572,7 @@ export default class Settings extends Vue {
     MenuSel(i: number): string { return (this.navState === "menu" && this.navSubstate === i) ? "control-hover" : ""; }
     ItemSel(state: string, i: number): string { return (this.navState === state && this.navSubstate === i) ? "control-hover" : ""; }
     BtnA(): void {
-        if(this.inDaisywheel) { return; }
+        if(this.inDaisywheel || this.showStyleGuide) { return; }
         if(this.navState === "menu") {
             if(this.navSubstate < 0) {
                 this.$router.push("/");
@@ -764,7 +764,7 @@ export default class Settings extends Vue {
     MvUp(): void { this.Navigate(0, -1); }
     MvDown(): void { this.Navigate(0, 1); }
     Navigate(x: number, y: number): void {
-        if(this.inDaisywheel) { return; }
+        if(this.inDaisywheel || this.showStyleGuide) { return; }
         if(this.navState === "menu") {
             if(this.navSubstate === -1 && y < 0) { return; }
             if(this.navSubstate === (this.settings.length - 1) && y > 0) { return; }
