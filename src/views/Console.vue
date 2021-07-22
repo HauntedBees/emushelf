@@ -2,8 +2,8 @@
 <v-app v-gamepad:button-a="BtnA" v-gamepad:button-b="BtnB" v-gamepad:button-y="BtnY"
     v-gamepad:left-analog-right.repeat="MvRight" v-gamepad:button-dpad-right.repeat="MvRight" v-gamepad:right-analog-right.repeat="MvRight"
     v-gamepad:left-analog-left.repeat="MvLeft" v-gamepad:button-dpad-left.repeat="MvLeft" v-gamepad:right-analog-left.repeat="MvLeft"
-    v-gamepad:left-analog-up.repeat="MvUp" v-gamepad:button-dpad-up.repeat="MvUp" v-gamepad:right-analog-up.repeat.repeat="MvUp2"
-    v-gamepad:left-analog-down.repeat="MvDown" v-gamepad:button-dpad-down.repeat="MvDown" v-gamepad:right-analog-down.repeat.repeat="MvDown2">
+    v-gamepad:left-analog-up.repeat="MvUp" v-gamepad:button-dpad-up.repeat="MvUp" v-gamepad:right-analog-up.repeat="MvUp2"
+    v-gamepad:left-analog-down.repeat="MvDown" v-gamepad:button-dpad-down.repeat="MvDown" v-gamepad:right-analog-down.repeat="MvDown2">
     <v-app-bar app color="primary">
         <v-btn to="/" text :class="BackState">
             <v-icon>mdi-arrow-left-circle</v-icon>
