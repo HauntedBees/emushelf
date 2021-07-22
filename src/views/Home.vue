@@ -9,6 +9,10 @@
             {{$t("name")}} v{{v}}
         </div>
         <v-spacer></v-spacer>
+        <v-btn text @click="Quit()" :class="MenuSel(-2)">
+            <span class="mr-2">{{$t("quitProgram")}}</span>
+            <v-icon>mdi-exit-to-app</v-icon>
+        </v-btn>
         <v-btn text to="/settings" :class="MenuSel(-1)">
             <span class="mr-2">{{$t("goToSettings")}}</span>
             <v-icon>mdi-cog</v-icon>
@@ -42,7 +46,9 @@ export default class Home extends Vue {
     navState = 0;
     MenuSel(i: number): string { return this.navState === i ? "control-hover" : ""; }
     BtnA(): void {
-        if(this.navState < 0) {
+        if(this.navState === -2) {
+            window.close();
+        } else if(this.navState === -1) {
             this.$router.push("/settings");
         } else {
             this.$router.push("/" + this.consoles[this.navState].shortCode);
@@ -59,7 +65,9 @@ export default class Home extends Vue {
     MvDown(): void { this.Navigate(0, 1); }
     Navigate(x: number, y: number): void {
         if(x !== 0) { // left and right
-            this.navState = this.navState - (this.navState % 3) + (3 + (this.navState + x)) % 3;
+            if(x < 0 && this.navState === -1) { this.navState = -2; }
+            else if(x > 0 && this.navState === -2) { this.navState = -1; }
+            else { this.navState = this.navState - (this.navState % 3) + (3 + (this.navState + x)) % 3; }
         }
         if(y !== 0) { // up and down
             this.navState += 3 * y;
@@ -72,5 +80,6 @@ export default class Home extends Vue {
             (this.$refs["console" + this.navState] as Vue[])[0].$el.scrollIntoView({ behavior: "smooth", block: "center" });
         }
     }
+    Quit(): void { window.close(); }
 }
 </script>

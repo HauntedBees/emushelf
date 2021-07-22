@@ -2,6 +2,7 @@
   "name": "EmuShelf",
   "welcome": "Hello and welcome to EmuShelf, a game emulator launcher! To get started, go to the \"Settings\" screen by clicking on that button up there, or by pressing up on your gamepad and then pressing \"A\" when it's selected. From there, go to the \"Emulators\" section and import some emulators from your computer, then go to the \"Consoles\" section and point to the folders your games are located and choose emulators for them, and then you'll be Ready To Go!",
   "goToSettings": "Settings",
+  "quitProgram": "Quit",
   "consoleBack": "Back",
   "consoleShowFilter": "Filter",
   "consoleHideFilter": "Hide",
