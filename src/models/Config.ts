@@ -238,19 +238,19 @@ class ConfigHandler {
     }
     public ProcessGameFolder(console: string, games: {[key: string]: GameInfo}, filepath: string) {
         let hasSubfolders = false;
-        const files = fs.readdirSync(filepath);
+        const files = fs.readdirSync(filepath, { withFileTypes: true });
         const consoleInfo = this.GetConsole(console);
-        const metadata = files.filter(g => g.endsWith(".pdf"));
-        const ROMs = files.filter(g => consoleInfo.extensions.some(e => g.endsWith(e)));
+        const metadata = files.filter(g => g.name.endsWith(".pdf"));
+        const ROMs = files.filter(g => g.isDirectory || consoleInfo.extensions.some(e => g.name.toLowerCase().endsWith(e)));
         const filenameGameInfoRef: {[key: string]: GameInfo} = {};
         ROMs.forEach(g => {
-            const filePath = path.join(filepath, g);
+            const filePath = path.join(filepath, g.name);
             if(fs.lstatSync(filePath).isDirectory()) {
                 this.ProcessGameFolder(console, games, filePath);
                 hasSubfolders = true;
                 return;
             }
-            const gi = new GameInfo(g, filepath);
+            const gi = new GameInfo(g.name, filepath);
             if(games[gi.name]) {
                 const old = games[gi.name];
                 old.regions.push(...gi.regions);
@@ -271,10 +271,10 @@ class ConfigHandler {
             filenameGameInfoRef[gi.filenameNoExt] = games[gi.name];
         });
         metadata.forEach(m => {
-            if(m.endsWith(".pdf")) { // manual
-                const noExt = m.replace(".pdf", "");
+            if(m.name.endsWith(".pdf")) { // manual
+                const noExt = m.name.replace(".pdf", "");
                 if(!filenameGameInfoRef[noExt]) { return; }
-                const gi = new GameInfo(m, filepath);
+                const gi = new GameInfo(m.name, filepath);
                 const manualpath = gi.filenames[0];
                 filenameGameInfoRef[noExt].manuals.push({
                     fileName: path.basename(manualpath),

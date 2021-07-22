@@ -9,7 +9,7 @@ Emulators not included (although you can download [RetroArch](https://www.retroa
 # Full Feature List
 
  * Select Emulators from your computer and configure them - currently *9* emulators and *50* RetroArch cores are recognized and configured automatically.
- * Configure Consoles - currently *20* consoles are set up by default.
+ * Configure Consoles - currently *30* consoles are set up by default.
  * Automatically group similar games together (multiple regions/versions of the same game) and choose a primary version of the game.
  * Record playtime of all games launched through EmuShelf.
  * View games in a list, compact list, or in rows of tiles.

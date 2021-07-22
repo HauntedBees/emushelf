@@ -1029,13 +1029,13 @@ export default class Settings extends Vue {
     // Text Selection
     SelectROMInput(idx: number): void {
         this.consolePathEditIdx = idx;
-        this.consolePathEditDefault = this.consoles[idx].path;
+        this.consolePathEditDefault = this.FilteredConsoles[idx].path;
         this.$nextTick(() => {
             (this.$refs["romPath" + idx] as HTMLInputElement[])[0].focus();
         });
     }
     ConfirmROMInputChanges(): void {
-        this.consoles[this.consolePathEditIdx].path = this.consolePathEditDefault;
+        this.FilteredConsoles[this.consolePathEditIdx].path = this.consolePathEditDefault;
         this.UpdateConsoles();
     }
     CancelROMInputChanges(): void {
