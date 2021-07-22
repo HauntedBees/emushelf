@@ -13,6 +13,13 @@
     -o-transition: opacity 300ms linear;
     transition: opacity 300ms linear;
 }
+@media (max-height: 800px) {
+    #vue-daisywheel-flower {
+        transform: scale(0.5);
+        margin-top: -160px;
+        margin-bottom: -160px;
+    }
+}
 
 #vue-daisywheel-js,
 #vue-daisywheel-js * {
