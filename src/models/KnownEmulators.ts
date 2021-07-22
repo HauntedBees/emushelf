@@ -4,21 +4,22 @@ interface PartialEmulator {
     consoles: string[];
 }
 export const KnownEmulators: {[key: string]: PartialEmulator[]} = { 
-    "dolphin": [{ name: "Dolphin", args: ["--exec=\"%ROM%\""], consoles: ["GCN", "Wii"] }],
+    "dolphin": [{ name: "Dolphin", args: ["--exec=%ROM%"], consoles: ["GCN", "Wii"] }],
     "fusion": [
-        { name: "Fusion (32x)", args: ["-32x", "-auto", "-fullscreen", "\"%ROM%\""], consoles: ["32x"] },
-        { name: "Fusion (Sega CD)", args: ["-scd", "-auto", "-fullscreen", "\"%ROM%\""], consoles: ["SCD"] },
-        { name: "Fusion (Game Gear)", args: ["-gg", "-auto", "-fullscreen", "\"%ROM%\""], consoles: ["GG"] },
-        { name: "Fusion (Genesis)", args: ["-gen", "-auto", "-fullscreen", "\"%ROM%\""], consoles: ["MD"] },
-        { name: "Fusion (Master System)", args: ["-sms", "-auto", "-fullscreen", "\"%ROM%\""], consoles: ["SMS"] }
+        { name: "Fusion (32x)", args: ["-32x", "-auto", "-fullscreen", "%ROM%"], consoles: ["32x"] },
+        { name: "Fusion (Sega CD)", args: ["-scd", "-auto", "-fullscreen", "%ROM%"], consoles: ["SCD"] },
+        { name: "Fusion (Game Gear)", args: ["-gg", "-auto", "-fullscreen", "%ROM%"], consoles: ["GG"] },
+        { name: "Fusion (Genesis)", args: ["-gen", "-auto", "-fullscreen", "%ROM%"], consoles: ["MD"] },
+        { name: "Fusion (Master System)", args: ["-sms", "-auto", "-fullscreen", "%ROM%"], consoles: ["SMS"] }
     ],
-    "project64": [{ name: "Project64", args: ["\"%ROM%\""], consoles: ["N64"] }],
-    "desume": [{ name: "DeSmuME", args: ["\"%ROM%\""], consoles: ["NDS"] }],
-    "fceux": [{ name: "FCEUX", args: ["\"%ROM%\""], consoles: ["NES"] }],
-    "pcsx2": [{ name: "PCSX2", args: ["\"%ROM%\""], consoles: ["PS2"] }],
-    "regen": [{ name: "Regen", args: ["--fullscreen", "\"%ROM%\""], consoles: ["SMS", "GG"] }],
-    "snes9x": [{ name: "Snes9x", args: ["-fullscreen", "\"%ROM%\""], consoles: ["SNES"] }],
+    "project64": [{ name: "Project64", args: ["%ROM%"], consoles: ["N64"] }],
+    "desmume": [{ name: "DeSmuME", args: ["%ROM%"], consoles: ["NDS"] }],
+    "fceux": [{ name: "FCEUX", args: ["%ROM%"], consoles: ["NES"] }],
+    "pcsx2": [{ name: "PCSX2", args: ["%ROM%"], consoles: ["PS2"] }],
+    "regen": [{ name: "Regen", args: ["--fullscreen", "%ROM%"], consoles: ["SMS", "GG"] }],
+    "snes9x": [{ name: "Snes9x", args: ["-fullscreen", "%ROM%"], consoles: ["SNES"] }],
     "visualboyadvance": [{ name: "VisualBoyAdvance", args: ["%ROM%"], consoles: ["GBA", "GBC", "GB"] }],
+    "oswan": [{ name: "Oswan", args: ["%ROM%"], consoles: ["WS"] }],
 };
 
 export const KnownLibRetroCores: {[key: string]: string[]} = {

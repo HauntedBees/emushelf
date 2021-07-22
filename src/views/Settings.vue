@@ -218,7 +218,7 @@
                                         <td><v-combobox v-model="c.extensions" @change="UpdateConsoles" class="pt-3" small-chips deletable-chips multiple dense append-icon="" /></td>
                                         <td>
                                             <v-select v-if="emulatorsForConsole[c.shortCode]" v-model="c.preferredEmulator" :items="emulatorsForConsole[c.shortCode]" @change="UpdateConsoles" />
-                                            <em v-else>No available emulators for this console.</em>
+                                            <em v-if="!emulatorsForConsole[c.shortCode]">No available emulators for this console.</em>
                                         </td>
                                         <td><v-switch ref="consoleOpt" :class="ItemSel('Consoles', i * 2)" v-model="c.favorite" @change="UpdateConsoles" /></td>
                                         <td><v-switch ref="consoleOpt" :class="ItemSel('Consoles', i * 2 + 1)" v-model="c.hideUnfavorited" @change="UpdateConsoles" /></td>
@@ -1061,7 +1061,7 @@ export default class Settings extends Vue {
         const files = (e.target as HTMLInputElement).files;
         if(!files || files.length !== 1) { return; }
         const file = files[0];
-        const emuName = file.name.replace(/\.(exe|dmg|app)/g, "").replace(/(_-).*/, ""), emuKey = emuName.toLowerCase();
+        const emuName = file.name.replace(/\.(exe|dmg|app)/g, "").replace(/[_-].*/, ""), emuKey = emuName.toLowerCase();
         if(emuKey === "retroarch") {
             const cores = fileUtil.GetRetroarchCores(file.path);
             cores.forEach(core => {
@@ -1085,6 +1085,7 @@ export default class Settings extends Vue {
             this.emulators.push({ name: emuName, path: file.path, consoles: [], args: ["%ROM%"] });
         }
         config.SaveEmulators(this.emulators);
+        this.UpdateEmulators();
     }
     UpdateEmulators(): void {
         config.SaveEmulators(this.emulators);
