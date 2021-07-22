@@ -1,0 +1,391 @@
+#vue-daisywheel-js {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: white;
+    z-index: 1000000;
+    font-family: "Roboto", sans-serif;
+    -webkit-transition: opacity 300ms linear;
+    -moz-transition: opacity 300ms linear;
+    -ms-transition: opacity 300ms linear;
+    -o-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+}
+
+#vue-daisywheel-js,
+#vue-daisywheel-js * {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+#vue-daisywheel-js #vue-daisywheel-modal-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#vue-daisywheel-js #vue-daisywheel-modal-overlay:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: ' ';
+    background-color: rgba(0, 0, 0, 0.8);
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.8), transparent);
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.8), transparent);
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.8), transparent);
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+#vue-daisywheel-js #vue-daisywheel-modal-container {
+    -webkit-transform: translate(50%);
+    -moz-transform: translate(50%);
+    -ms-transform: translate(50%);
+    -o-transform: translate(50%);
+    transform: translate(50%);
+}
+
+#vue-daisywheel-js #vue-daisywheel-modal {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 736px;
+    margin-left: -368px;
+}
+
+#vue-daisywheel-js #vue-daisywheel {
+    opacity: 1;
+    -webkit-transition: opacity 200ms linear;
+    -moz-transition: opacity 200ms linear;
+    -ms-transition: opacity 200ms linear;
+    -o-transition: opacity 200ms linear;
+    transition: opacity 200ms linear;
+}
+
+#vue-daisywheel-js #vue-daisywheel-controller-warning {
+    position: absolute;
+    width: 100%;
+    margin-top: 63%;
+    z-index: 1;
+    text-align: center;
+    font-size: 52px;
+    text-shadow: 0 0 10px black;
+}
+
+#vue-daisywheel-js #vue-daisywheel-controller-warning a {
+    color: white;
+}
+
+#vue-daisywheel-js #vue-daisywheel-input-container {
+    width: 640px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    padding-top: 35px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#vue-daisywheel-js #vue-daisywheel-input {
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    overflow: hidden;
+    resize: none;
+    font-size: 22px;
+}
+#vue-daisywheel-js #vue-daisywheel-input .v-input__slot {
+    background-color: #FFFFFF;
+    padding-left: 28px;
+}
+
+#vue-daisywheel-js #vue-daisywheel-controls-ui {
+    position: relative;
+    width: 640px;
+    text-align: center;
+    margin: 0 auto;
+    padding-left: 60px;
+    padding-top: 30px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+#vue-daisywheel-js .control-ui {
+    display: inline-block;
+    padding: 10px 27px;
+    width: 212px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#vue-daisywheel-js .control-ui-icon {
+    position: relative;
+    display: block;
+    float: left;
+    width: 40px;
+    height: 40px;
+}
+
+#vue-daisywheel-js .control-ui-icon:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 5px 5px;
+    background: #1d303e;
+    border: 2px solid black;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#vue-daisywheel-js .control-ui-label {
+    display: block;
+    height: 40px;
+    width: 100px;
+    line-height: 45px;
+    margin-left: 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    float: left;
+    text-align: left;
+    text-shadow: 0 0 5px #000000;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+#vue-daisywheel-js #vue-daisywheel-L1-ui .control-ui-icon:before {
+    top: 5px;
+    bottom: 2px;
+    content: 'LB';
+    -webkit-border-radius: 15px 2px 2px 2px;
+    -moz-border-radius: 15px 2px 2px 2px;
+    border-radius: 15px 2px 2px 2px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+#vue-daisywheel-js #vue-daisywheel-R1-ui .control-ui-icon:before {
+    top: 5px;
+    bottom: 2px;
+    content: 'RB';
+    -webkit-border-radius: 15px 2px 2px 2px;
+    -moz-border-radius: 15px 2px 2px 2px;
+    border-radius: 15px 2px 2px 2px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+#vue-daisywheel-js #vue-daisywheel-L2-ui .control-ui-icon:before {
+    top: 5px;
+    bottom: 2px;
+    content: 'LT';
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+#vue-daisywheel-js #vue-daisywheel-R2-ui .control-ui-icon:before {
+    top: 5px;
+    bottom: 2px;
+    content: 'RT';
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+#vue-daisywheel-js #vue-daisywheel-L3-ui .control-ui-icon:before {
+    top: 0;
+    bottom: 0;
+    line-height: 21px;
+    content: 'L';
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+#vue-daisywheel-js #vue-daisywheel-flower {
+    position: relative;
+    height: 640px;
+    width: 640px;
+    border: 48px solid #15232d;
+    background: #1d303e;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+#vue-daisywheel-js #vue-daisywheel-flower:before {
+    position: absolute;
+    height: 368px;
+    width: 368px;
+    left: 144px;
+    top: 144px;
+    content: ' ';
+    background-color: #223846;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+#vue-daisywheel-js .petal-container {
+    position: absolute;
+    height: 160px;
+    width: 160px;
+}
+
+#vue-daisywheel-js .petal-container.selected {
+    z-index: 1;
+}
+
+#vue-daisywheel-js .petal-container.selected .petal {
+    background-color: #3A596B;
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+#vue-daisywheel-js .petal {
+    background-color: #223846;
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius: 0 50% 50% 50%;
+    -moz-border-radius: 0 50% 50% 50%;
+    border-radius: 0 50% 50% 50%;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-transition: transform 200ms linear;
+    -moz-transition: transform 200ms linear;
+    -ms-transition: transform 200ms linear;
+    -o-transition: transform 200ms linear;
+    transition: transform 200ms linear;
+}
+
+#vue-daisywheel-js .petal-inner {
+    position: absolute;
+    left: -8px;
+    top: -8px;
+    margin: 16px;
+}
+
+#vue-daisywheel-js .buttons {
+    height: 144px;
+    width: 144px;
+}
+
+#vue-daisywheel-js .button {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    color: white;
+    font-size: 22px;
+    line-height: 48px;
+    font-weight: 500;
+    text-align: center;
+    text-shadow: 0 0 2px #000000;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+#vue-daisywheel-js .selected .button {
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+#vue-daisywheel-js .selected .button.pressed {
+    background: #555;
+}
+
+#vue-daisywheel-js .button-left {
+    top: 48px;
+    left: 8px;
+}
+
+#vue-daisywheel-js .selected .button-left {
+    background: #19417F;
+}
+
+#vue-daisywheel-js .button-top {
+    top: 8px;
+    left: 48px;
+}
+
+#vue-daisywheel-js .selected .button-top {
+    background: #BD8F1A;
+}
+
+#vue-daisywheel-js .button-right {
+    top: 48px;
+    left: 88px;
+}
+
+#vue-daisywheel-js .selected .button-right {
+    background: #A01B10;
+}
+
+#vue-daisywheel-js .button-bottom {
+    top: 88px;
+    left: 48px;
+}
+
+#vue-daisywheel-js .selected .button-bottom {
+    background: #5E8D00;
+}
+
+#vue-daisywheel-js .cf:before,
+#vue-daisywheel-js .cf:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+}
+
+#vue-daisywheel-js .cf:after {
+    clear: both;
+}

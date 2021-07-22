@@ -1,0 +1,61 @@
+{
+    "dark": {
+        "name": "Default",
+        "dark": true,
+		"primary": "#A018A8",
+		"accent": "#8736D5",
+		"secondary": "#796083",
+		"success": "#4CAF67",
+		"info": "#67A6D8",
+		"warning": "#F0AE5A",
+		"error": "#FF526A"
+	},
+	"light": {
+        "name": "Default (Light)",
+        "dark": false,
+		"primary": "#F225FF",
+		"accent": "#B15FFF",
+		"secondary": "#D7BCE2",
+		"success": "#61EB87",
+		"info": "#71BBF5",
+		"warning": "#FFA738",
+		"error": "#FF2241",
+        "primaryText": "#000000",
+        "secondaryText": "#000000"
+	},
+	"NES": {
+        "name": "The Original",
+        "dark": true,
+		"primary": "#FE0000",
+		"secondary": "#7E7E7E",
+        "depressed": true,
+        "borderRadius": 0
+	},
+    "SNES": {
+        "name": "Super Original",
+        "dark": true,
+        "primary": "#4B3580",
+		"secondary": "#8176A1",
+        "depressed": true,
+        "borderRadius": 20
+    },
+    "GCN": {
+        "name": "Cube",
+        "dark": true,
+        "primary": "#4E409E",
+		"secondary": "#999999",
+        "borderRadius": 0
+    },
+    "XB": {
+        "name": "Box",
+        "dark": true,
+        "primary": "#107C0F",
+		"secondary": "#000000"
+    },
+    "PS": {
+        "name": "Play",
+        "dark": true,
+        "primary": "#FF0B22",
+		"secondary": "#032161"
+    }
+}
