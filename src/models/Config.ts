@@ -241,12 +241,11 @@ class ConfigHandler {
         const files = fs.readdirSync(filepath, { withFileTypes: true });
         const consoleInfo = this.GetConsole(console);
         const metadata = files.filter(g => g.name.endsWith(".pdf"));
-        const ROMs = files.filter(g => g.isDirectory || consoleInfo.extensions.some(e => g.name.toLowerCase().endsWith(e)));
+        const ROMs = files.filter(g => g.isDirectory() || consoleInfo.extensions.some(e => g.name.toLowerCase().endsWith(e)));
         const filenameGameInfoRef: {[key: string]: GameInfo} = {};
         ROMs.forEach(g => {
-            const filePath = path.join(filepath, g.name);
-            if(fs.lstatSync(filePath).isDirectory()) {
-                this.ProcessGameFolder(console, games, filePath);
+            if(g.isDirectory()) {
+                this.ProcessGameFolder(console, games, path.join(filepath, g.name));
                 hasSubfolders = true;
                 return;
             }
