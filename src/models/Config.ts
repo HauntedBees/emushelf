@@ -219,7 +219,7 @@ class ConfigHandler {
 //#endregion
 //#region Console Screen
     public GetView(): string { return this.config.viewType; }
-    public GetTilesPerRow(): number { return this.config.tilesPerRow; }
+    public GetTilesPerRow(): number { return parseInt(this.config.tilesPerRow.toString()); }
     public GetConsole(shortCode: string): ConsoleInfo {
         return this.config.consoles.filter(c => c.shortCode === shortCode)[0];
     }
