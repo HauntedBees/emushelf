@@ -65,7 +65,7 @@
                                                 </v-row>
                                                 <v-row>
                                                     <v-col class="text-center">
-                                                        <v-btn color="primary">{{$t("openConfigFileBtn")}}</v-btn>
+                                                        <v-btn @click="ShowConfigFile()" color="primary">{{$t("openConfigFileBtn")}}</v-btn>
                                                     </v-col>
                                                 </v-row>
                                             </v-col>
@@ -959,6 +959,7 @@ export default class Settings extends Vue {
     }
 //#endregion
 //#region Settings
+    ShowConfigFile(): void { fileUtil.ShowFile(config.GetConfigPath()); }
     UpdateConfig(): void {
         if(!this.configInfo) { return; }
         const oldConfig: ConfigInfo = config.GetConfig();

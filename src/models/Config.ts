@@ -174,6 +174,7 @@ class ConfigHandler {
         this.config.retroarchCorePath = c.retroarchCorePath;
         this.SaveConfig();
     }
+    public GetConfigPath(): string { return this.configPath; }
     public GetRetroArchPath(): string { return this.config.retroarchCorePath || ""; }
     public GetAPIKey(): string { return this.config.giantBombAPIKey; }
     public GetTags(listOnly = false, activeOnly = false): { tags: string[], xref: {[key: string]: number} } {
