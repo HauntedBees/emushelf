@@ -1,3 +1,4 @@
+import config from "@/models/Config";
 import { ipcRenderer } from "electron";
 import fs from "fs";
 import path from "path";
@@ -29,9 +30,12 @@ class FileUtil {
         })
     }
     public GetRetroarchCores(retroarchExePath: string): string[] {
-        const retroarchPath = path.dirname(retroarchExePath);
-        const corePath = path.join(retroarchPath, "cores");
-        return fs.readdirSync(corePath).map(c => path.join(retroarchPath, "cores", c));
+        let corePath = config.GetRetroArchPath();
+        if(!corePath) {
+            const retroarchPath = path.dirname(retroarchExePath);
+            corePath = path.join(retroarchPath, "cores");
+        }
+        return fs.readdirSync(corePath).map(c => path.join(corePath, c));
     }
     public GetRetroarchCoreName(corePath: string): string {
         return path.basename(corePath, path.extname(corePath)).replace("_libretro", "");

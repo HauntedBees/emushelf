@@ -55,6 +55,19 @@
                                                     </v-col>
                                                 </v-row>
                                                 <div v-if="showChromeInfoText">{{$t("configChromeInfo")}}</div>
+                                                <v-row>
+                                                    <v-col>
+                                                        <v-text-field ref="retroarchcorepath" class="d-inline-block" @change="UpdateConfig" :label="$t('retroarchCorePath')" v-model="configInfo.retroarchCorePath" />
+                                                        <BeeTooltip :tooltip="$t('retroarchCorePathDesc')">
+                                                            <v-icon small>mdi-information</v-icon>
+                                                        </BeeTooltip>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col class="text-center">
+                                                        <v-btn color="primary">{{$t("openConfigFileBtn")}}</v-btn>
+                                                    </v-col>
+                                                </v-row>
                                             </v-col>
                                         </v-row>
                                     </v-card-text>
@@ -112,6 +125,7 @@
                     <v-card-title>{{$t("eConfig")}}</v-card-title>
                     <v-card-text>
                         <div class="text-right mb-2">
+                            <v-btn color="primary" class="mr-2" @click="addEmulatorPath = true">{{$t("eAddPath")}}</v-btn>
                             <v-btn color="primary" @click="$refs.emuimport.click()">{{$t("eImport")}}</v-btn>
                             <input ref="emuimport" class="d-none" type="file" @change="EmulatorSelect" />
                         </div>
@@ -456,6 +470,24 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
+    <v-dialog v-model="addEmulatorPath">
+        <v-card>
+            <v-card-title>{{$t("eAddPathName")}}</v-card-title>
+            <v-card-text>
+                <p>{{$t("eAddPathDesc")}}</p>
+                <v-row>
+                    <v-col>
+                        <v-text-field v-model="addEmulatorPathText" @keyup.enter="SaveNewEmulator()" :label="$t('eAddPathLabel')" :placeholder="$t('eAddPathLabel')"></v-text-field>
+                    </v-col>
+                </v-row>
+            </v-card-text>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" text @click="SaveNewEmulator()">{{$t("eAddSave")}}</v-btn>
+                <v-btn color="secondary" text @click="CloseNewEmulator()">{{$t("eAddCancel")}}</v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
 </v-app>
 </template>
 <style scoped>
@@ -509,6 +541,8 @@ export default class Settings extends Vue {
     emulators: EmulatorInfo[] = [];
     consoleNameRef: {[key: string]: string} = {};
     emulatorsForConsole: {[key: string]: string[]} = {};
+    addEmulatorPath = false;
+    addEmulatorPathText = "";
 
     tagList: string[] = [];
     tagXref: {[key: string]: number} = {};
@@ -642,7 +676,8 @@ export default class Settings extends Vue {
                         useGiantBombAPI: this.configInfo.useGiantBombAPI,
                         currentTheme: this.configInfo.currentTheme,
                         viewType: (this.configInfo.viewType === "normal" ? "compact" : (this.configInfo.viewType === "compact" ? "tile" : "normal")),
-                        tilesPerRow: this.configInfo.tilesPerRow
+                        tilesPerRow: this.configInfo.tilesPerRow,
+                        retroarchCorePath: this.configInfo.retroarchCorePath
                     };
                     this.UpdateConfig();
                     break;
@@ -655,7 +690,8 @@ export default class Settings extends Vue {
                         useGiantBombAPI: this.configInfo.useGiantBombAPI,
                         currentTheme: this.configInfo.currentTheme,
                         viewType: this.configInfo.viewType,
-                        tilesPerRow: this.configInfo.tilesPerRow + 1
+                        tilesPerRow: this.configInfo.tilesPerRow + 1,
+                        retroarchCorePath: this.configInfo.retroarchCorePath
                     };
                     this.UpdateConfig();
                     break;
@@ -733,7 +769,8 @@ export default class Settings extends Vue {
                 useGiantBombAPI: this.configInfo.useGiantBombAPI,
                 currentTheme: this.configInfo.currentTheme,
                 viewType: this.configInfo.viewType,
-                tilesPerRow: Math.max(this.configInfo.tilesPerRow - 1, 1)
+                tilesPerRow: Math.max(this.configInfo.tilesPerRow - 1, 1),
+                retroarchCorePath: this.configInfo.retroarchCorePath
             };
             this.UpdateConfig();
         }
@@ -1120,6 +1157,40 @@ export default class Settings extends Vue {
     DeleteEmulator(idx: number): void {
         this.emulators.splice(idx, 1);
         this.UpdateEmulators();
+    }
+    SaveNewEmulator(): void {
+        const emuPath = this.addEmulatorPathText;
+        const emuName = emuPath.replace(/\.(exe|dmg|app)/g, "").replace(/[_-].*/, ""), emuKey = emuName.toLowerCase();
+        if(emuKey === "retroarch") {
+            const cores = fileUtil.GetRetroarchCores(emuPath);
+            cores.forEach(core => {
+                const coreKey = fileUtil.GetRetroarchCoreName(core);
+                const coreName = `RetroArch (${coreKey})`;
+                if(this.emulators.some(oe => oe.name === coreName && oe.path === emuPath)) { return; } // prevent duplicates
+                if(KnownLibRetroCores[coreKey]) {
+                    this.emulators.push({ name: coreName, path: emuPath, consoles: KnownLibRetroCores[coreKey], args: ["-L", core, "-f", "%ROM%"] });
+                } else {
+                    this.emulators.push({ name: coreName, path: emuPath, consoles: [], args: ["-L", core, "-f", "%ROM%"] });
+                }
+            });
+        } else if(KnownEmulators[emuKey]) {
+            const es = KnownEmulators[emuKey];
+            for(let i = 0; i < es.length; i++) {
+                const e = es[i];
+                if(this.emulators.some(oe => oe.name === e.name && oe.path === emuPath)) { return; } // prevent duplicates
+            }
+            this.emulators.push(...es.map(e => ({ name: e.name, path: emuPath, consoles: e.consoles, args: e.args })));
+        } else {
+            this.emulators.push({ name: emuName, path: emuPath, consoles: [], args: ["%ROM%"] });
+        }
+        config.SaveEmulators(this.emulators);
+        this.UpdateEmulators();
+        this.addEmulatorPath = false;
+        this.addEmulatorPathText = "";
+    }
+    CancelNewEmulator(): void {
+        this.addEmulatorPath = false;
+        this.addEmulatorPathText = "";
     }
 //#endregion
 //#region Tags

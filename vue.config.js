@@ -7,7 +7,10 @@ module.exports = {
       nodeIntegration: true,
       builderOptions: {
         win: { icon: './build/icons/icon.ico' },
-        linux: { icon: './build/icons/icon.ico' }
+        linux: {
+          icon: './build/icons/icon256x256.png',
+          category: 'Game'
+        }
       }
     },
     i18n: {

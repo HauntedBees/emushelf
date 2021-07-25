@@ -31,6 +31,7 @@ export interface ConfigInfo {
     currentTheme: string;
     viewType: string;
     tilesPerRow: number;
+    retroarchCorePath: string;
 }
 export interface StyleInfo {
     name: string;
@@ -67,6 +68,7 @@ interface Config {
     viewType: string;
     tilesPerRow: number;
     language: string;
+    retroarchCorePath: string;
 }
 class ConfigHandler {
 //#region Initialization
@@ -81,7 +83,8 @@ class ConfigHandler {
         tags: [],
         viewType: "normal",
         tilesPerRow: 8,
-        language: "en"
+        language: "en",
+        retroarchCorePath: ""
     };
     private configPath: string;
     private playInfo: {[key: string]: PlayInfo} = {};
@@ -156,7 +159,8 @@ class ConfigHandler {
             useGiantBombAPI: this.config.giantBombAPIKey !== "",
             currentTheme: this.config.currentTheme,
             viewType: this.config.viewType,
-            tilesPerRow: this.config.tilesPerRow
+            tilesPerRow: this.config.tilesPerRow,
+            retroarchCorePath: this.config.retroarchCorePath || ""
         };
     }
     public UpdateConfig(c: ConfigInfo): void {
@@ -167,8 +171,10 @@ class ConfigHandler {
         this.config.currentTheme = c.currentTheme;
         this.config.viewType = c.viewType;
         this.config.tilesPerRow = c.tilesPerRow;
+        this.config.retroarchCorePath = c.retroarchCorePath;
         this.SaveConfig();
     }
+    public GetRetroArchPath(): string { return this.config.retroarchCorePath || ""; }
     public GetAPIKey(): string { return this.config.giantBombAPIKey; }
     public GetTags(listOnly = false, activeOnly = false): { tags: string[], xref: {[key: string]: number} } {
         const tagMap: {[key: string]: number} = {};
