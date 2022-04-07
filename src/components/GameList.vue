@@ -52,22 +52,20 @@ export default class GameList extends Vue {
     @Prop() name!: string;
     @Prop() compact!: boolean;
     @Prop() console!: ConsoleInfo;
-    @Prop() fonts!: string[];
     theme: ThemeInfo = {
         textColor: "#000000",
-        bgColor: "#FFFFFF",
-        font: "Roboto"
+        bgColor: "#FFFFFF"
     };
     get styles(): string {
         if(this.compact) {
-            return `background-color: ${this.theme.bgColor}; color: ${this.theme.textColor}!important; font-family: ${this.theme.font}`;
+            return `background-color: ${this.theme.bgColor}; color: ${this.theme.textColor}!important`;
         } else {
             return `background: linear-gradient(to right, #1E1E1E 80%, #1E1E1E00), url('${this.game.image}') no-repeat right center`;
         }
     }
     mounted(): void {
         if(this.compact) {
-            this.theme = MakeUpTheme(this.game.name, this.fonts);
+            this.theme = MakeUpTheme(this.game.name);
         } else if(!this.game.image) {
             this.GetImage(true);
         }

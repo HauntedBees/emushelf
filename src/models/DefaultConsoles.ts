@@ -8,7 +8,7 @@ export const DefaultConsoles: {[key: string]: ConsoleInfo} = {
     "SNES": GetDefaultConsole("SNES", "Super Nintendo Entertainment System", [".smc", ".sfc"]),
     "VB": GetDefaultConsole("VB", "Virtual Boy", [".vb"]),
     "N64": GetDefaultConsole("N64", "Nintendo 64", [".n64", ".z64", ".ndd", ".v64"]),
-    "GCN": GetDefaultConsole("GCN", "Nintendo GameCube", [".iso", ".gcm", ".gcz"]),
+    "GCN": GetDefaultConsole("GCN", "Nintendo GameCube", [".nkit.iso", ".iso", ".gcm", ".gcz"]),
     "Wii": GetDefaultConsole("Wii", "Nintendo Wii", [".wbfs", ".wad"]),
     // -- Wii U
     "Switch": GetDefaultConsole("Switch", "Nintendo Switch", [".nsp", ".xci"]),

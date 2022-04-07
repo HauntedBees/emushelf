@@ -1,6 +1,6 @@
 <template>
 <div>
-    <router-view @msg="ShowInfo" @err="ShowError" @load="ToggleLoad" @loadmsg="SetLoadMsg" @wheel="ToggleWheel" :fonts="fonts" />
+    <router-view @msg="ShowInfo" @err="ShowError" @load="ToggleLoad" @loadmsg="SetLoadMsg" @wheel="ToggleWheel" />
     <v-snackbar v-model="showMessage" top centered :color="messageColor">{{messageText}}</v-snackbar>
     <Loader v-if="loading" />
     <div class="loadMsg" v-if="loading && loadingMsg">{{loadingMsg}}</div>
@@ -48,9 +48,7 @@ html { overflow-y: auto!important }
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import { InputOpen } from '@/models/Gamepad';
 import { SwitchTheme } from '@/utils/MiscUtil';
-import { GetFonts } from '@/utils/MiscUtil';
 import config from '@/models/Config';
-import { FontList } from 'font-list';
 @Component
 export default class App extends Vue {
     loading = false;
@@ -59,7 +57,6 @@ export default class App extends Vue {
     showDaisywheel = false; 
     daisyLabel = "";
     daisyValue = "";
-    fonts: FontList = [];
     daisyElement: HTMLInputElement|HTMLTextAreaElement|null = null;
     closeCallback: null|((s: string) => void) = null;
     editCallback: null|((s: string) => void) = null;
@@ -116,12 +113,6 @@ export default class App extends Vue {
         this.$root.$i18n.locale = config.GetLanguage();
         const styleInfo = config.GetCurrentStyle();
         SwitchTheme(this, styleInfo[0], styleInfo[1]);
-
-        this.loading = true;
-        GetFonts().then(v => {
-            this.loading = false;
-            this.fonts = v;
-        });
 
         document.addEventListener("mousemove", () => { document.body.classList.remove("gamepad"); });
         document.body.classList.add("gamepad");

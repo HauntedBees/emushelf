@@ -29,7 +29,7 @@
                         <v-row :key="index" class="mt-0 mx-4" dense>
                             <v-col v-for="(game, idx2) in item" class="pa-0 gtcontainer" :key="game">
                                 <GameTile v-if="game" :ref="'gameTile' + (index * tilesPerRow + idx2)" :class="GameSel(index * tilesPerRow + idx2)" :key="game" :name="game" :game="games[game]" :console="console"
-                                    @select="SelectGame(games[game])" @dblclick="LaunchGame(games[game])" :fonts="fonts" />
+                                    @select="SelectGame(games[game])" @dblclick="LaunchGame(games[game])" />
                             </v-col>
                         </v-row>
                     </template>
@@ -54,7 +54,7 @@
                     <v-virtual-scroll ref="virtScroll" :bench="5" :items="filteredGames" :itemHeight="ListItemHeight" :height="listHeight">
                         <template v-slot:default="{ item, index }">
                             <GameList :ref="'game' + index" :class="GameSel(index)" :key="item" :name="item" :game="games[item]" :console="console"
-                                @select="SelectGame(games[item])" @dblclick="LaunchGame(games[item])" :compact="viewType==='compact'" :fonts="fonts" />
+                                @select="SelectGame(games[item])" @dblclick="LaunchGame(games[item])" :compact="viewType==='compact'" />
                             <v-divider />
                         </template>
                     </v-virtual-scroll>
@@ -104,7 +104,6 @@ import { GetVueFromVuetifyArray } from '@/utils/VueUtil';
 import { OpenDaisywheel } from '@/utils/MiscUtil';
 @Component({ components: { GameCard, GameList, GameTile } })
 export default class Console extends Vue {
-    @Prop() fonts!: string[];
     console!: ConsoleInfo;
     games: {[key: string]: GameInfo} = {};
     gameCount = 0;

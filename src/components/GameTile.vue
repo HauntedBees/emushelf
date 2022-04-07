@@ -33,15 +33,13 @@ export default class GameTile extends Vue {
     @Prop() game!: GameInfo;
     @Prop() name!: string;
     @Prop() console!: ConsoleInfo;
-    @Prop() fonts!: string[];
     theme: ThemeInfo = {
         textColor: "#000000",
-        bgColor: "#FFFFFF",
-        font: "Roboto"
+        bgColor: "#FFFFFF"
     };
     mounted(): void {
         this.GetImage(true);
-        if(!this.game.image) { this.theme = MakeUpTheme(this.game.name, this.fonts); }
+        if(!this.game.image) { this.theme = MakeUpTheme(this.game.name); }
         config.SortGameAttributes(this.game.addtlInfo);
     }
     Click(): void {

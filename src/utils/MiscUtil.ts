@@ -1,7 +1,6 @@
 import { StyleInfo } from "@/models/Config";
 import { InputOpen } from "@/models/Gamepad";
 import { ipcRenderer } from "electron";
-import { FontList, getFonts } from 'font-list';
 
 import Vue from "vue";
 export function TunnelEmit(v: Vue, event: string, value: boolean|string|InputOpen): void {
@@ -46,15 +45,12 @@ export function SwitchTheme(v: Vue, s: StyleInfo, backup: StyleInfo): void {
 export interface ThemeInfo {
     textColor: string;
     bgColor: string;
-    font: string;
 }
 function UseDarkFont(r: number, g: number, b: number): boolean {
     return (r * 0.299 + g * 0.587  + b * 0.114) > 180;
 }
 
-export async function GetFonts(): Promise<FontList> { return getFonts(); }
-
-export function MakeUpTheme(name: string, fonts: FontList): ThemeInfo {
+export function MakeUpTheme(name: string): ThemeInfo {
     let nameVal = 0;
     for(let i = 0; i < name.length; i++) { 
         nameVal += (i + 1) * name.charCodeAt(i);
@@ -71,8 +67,7 @@ export function MakeUpTheme(name: string, fonts: FontList): ThemeInfo {
 
     return {
         textColor: `rgb(${textRed}, ${textGreen}, ${textBlue})`,
-        bgColor: `rgb(${bgRed}, ${bgGreen}, ${bgBlue})`,
-        font: fonts[nameVal % fonts.length]
+        bgColor: `rgb(${bgRed}, ${bgGreen}, ${bgBlue})`
     };
 }
 
