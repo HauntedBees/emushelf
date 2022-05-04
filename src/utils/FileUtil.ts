@@ -29,11 +29,15 @@ class FileUtil {
             });
         })
     }
-    public GetRetroarchCores(retroarchExePath: string): string[] {
+    public GetRetroarchCores(retroarchExePath: string, isOSX: boolean): string[] {
         let corePath = config.GetRetroArchPath();
         if(!corePath) {
-            const retroarchPath = path.dirname(retroarchExePath);
-            corePath = path.join(retroarchPath, "cores");
+            if(isOSX) {
+                corePath = "~/Library/Application Support/RetroArch/cores";
+            } else {
+                const retroarchPath = path.dirname(retroarchExePath);
+                corePath = path.join(retroarchPath, "cores");
+            }
         }
         return fs.readdirSync(corePath).map(c => path.join(corePath, c));
     }

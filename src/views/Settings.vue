@@ -1101,7 +1101,7 @@ export default class Settings extends Vue {
         const file = files[0];
         const emuName = file.name.replace(/\.(exe|dmg|app)/g, "").replace(/[_-].*/, ""), emuKey = emuName.toLowerCase();
         if(emuKey === "retroarch") {
-            const cores = fileUtil.GetRetroarchCores(file.path);
+            const cores = fileUtil.GetRetroarchCores(file.path, file.name.toLowerCase() === "retroarch.app");
             cores.forEach(core => {
                 const coreKey = fileUtil.GetRetroarchCoreName(core);
                 const coreName = `RetroArch (${coreKey})`;
@@ -1163,7 +1163,7 @@ export default class Settings extends Vue {
         const emuPath = this.addEmulatorPathText;
         const emuName = emuPath.replace(/\.(exe|dmg|app)/g, "").replace(/[_-].*/, ""), emuKey = emuName.toLowerCase();
         if(emuKey === "retroarch") {
-            const cores = fileUtil.GetRetroarchCores(emuPath);
+            const cores = fileUtil.GetRetroarchCores(emuPath, emuPath.toLowerCase() === "retroarch.app");
             cores.forEach(core => {
                 const coreKey = fileUtil.GetRetroarchCoreName(core);
                 const coreName = `RetroArch (${coreKey})`;

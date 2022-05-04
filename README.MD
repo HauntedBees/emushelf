@@ -10,7 +10,7 @@ EmuShelf is a middle-of-the-road game launcher with custom game tagging, playtim
 
 ![View of Emulator Configuration Screen](/screenshots/configview.png?raw=true "A simple interface keeps setup easy!")
 
-Emulators not included (I'd recommend downloading [RetroArch](https://www.retroarch.com/) as a good starting point and download the appropriate cores there; if you select RetroArch as an emulator, EmuShelf will automatically detect all available cores and set them up for you). In case it needed to be stated, ***EmuShelf does not come with any ROMs***. It is debatably legal to rip your own ROMs from your own legally owned games (depending on your location and how nice the judges are feeling if a case about this ever goes to court) and almost definitely illegal to download ROMs online, so no information about how to acquire ROMs will be provided here for the sake of, you know, not having assassins from N\*\*\*\*\*\*\* at my door.
+Emulators not included, and in case it needed to be stated, ***EmuShelf does not come with any ROMs***. It is debatably legal to rip your own ROMs from your own legally owned games (depending on your location and how nice the judges are feeling if a case about this ever goes to court) and almost definitely illegal to download ROMs online, so no information about how to acquire ROMs will be provided here for the sake of, you know, not having assassins from N\*\*\*\*\*\*\* at my door.
 
 ![View of Compact Listing](/screenshots/compactview.png?raw=true "Search by name! Filter by tags! Use the compact view to see more games at once!")
 
