@@ -1100,32 +1100,35 @@ export default class Settings extends Vue {
         const files = (e.target as HTMLInputElement).files;
         if(!files || files.length !== 1) { return; }
         const file = files[0];
-        let filePath = file.path;
+        let emuPath = file.path;
         const emuName = file.name.replace(/\.(exe|dmg|app|zip)/g, "").replace(/[_-].*/, ""), emuKey = emuName.toLowerCase();
+        const appDirExeGuess = `/Applications/${emuName}.app/Contents/MacOS/${emuName}`;
+        const appDirExeGuessLc = `/Applications/${emuName}.app/Contents/MacOS/${emuKey}`;
+        if (process.platform === 'darwin') {
+            if (fs.existsSync(appDirExeGuess)) emuPath = appDirExeGuess;
+            else if (fs.existsSync(appDirExeGuessLc)) emuPath = appDirExeGuessLc;
+        }
         if(emuKey === "retroarch") {
-            const isOSX = process.platform === 'darwin'
-            const isInOSXAppDir = isOSX && fs.existsSync("/Applications/RetroArch.app");
-            if (isInOSXAppDir) filePath = "/Applications/RetroArch.app/Contents/MacOS/RetroArch";
-            const cores = fileUtil.GetRetroarchCores(filePath, file.name.toLowerCase() === "retroarch.app.zip" && isInOSXAppDir);
+            const cores = fileUtil.GetRetroarchCores(emuPath, file.name.toLowerCase() === "retroarch.app.zip" && (emuPath === appDirExeGuess || emuPath === appDirExeGuessLc));
             cores.forEach(core => {
                 const coreKey = fileUtil.GetRetroarchCoreName(core);
                 const coreName = `RetroArch (${coreKey})`;
-                if(this.emulators.some(oe => oe.name === coreName && oe.path === filePath)) { return; } // prevent duplicates
+                if(this.emulators.some(oe => oe.name === coreName && oe.path === emuPath)) { return; } // prevent duplicates
                 if(KnownLibRetroCores[coreKey]) {
-                    this.emulators.push({ name: coreName, path: filePath, consoles: KnownLibRetroCores[coreKey], args: ["-L", core, "-f", "%ROM%"] });
+                    this.emulators.push({ name: coreName, path: emuPath, consoles: KnownLibRetroCores[coreKey], args: ["-L", core, "-f", "%ROM%"] });
                 } else {
-                    this.emulators.push({ name: coreName, path: filePath, consoles: [], args: ["-L", core, "-f", "%ROM%"] });
+                    this.emulators.push({ name: coreName, path: emuPath, consoles: [], args: ["-L", core, "-f", "%ROM%"] });
                 }
             });
         } else if(KnownEmulators[emuKey]) {
             const es = KnownEmulators[emuKey];
             for(let i = 0; i < es.length; i++) {
                 const e = es[i];
-                if(this.emulators.some(oe => oe.name === e.name && oe.path === filePath)) { return; } // prevent duplicates
+                if(this.emulators.some(oe => oe.name === e.name && oe.path === emuPath)) { return; } // prevent duplicates
             }
-            this.emulators.push(...es.map(e => ({ name: e.name, path: filePath, consoles: e.consoles, args: e.args })));
+            this.emulators.push(...es.map(e => ({ name: e.name, path: emuPath, consoles: e.consoles, args: e.args })));
         } else {
-            this.emulators.push({ name: emuName, path: filePath, consoles: [], args: ["%ROM%"] });
+            this.emulators.push({ name: emuName, path: emuPath, consoles: [], args: ["%ROM%"] });
         }
         config.SaveEmulators(this.emulators);
         this.UpdateEmulators();
@@ -1165,12 +1168,16 @@ export default class Settings extends Vue {
         this.UpdateEmulators();
     }
     SaveNewEmulator(): void {
-        const emuPath = this.addEmulatorPathText;
+        let emuPath = this.addEmulatorPathText;
         const emuName = emuPath.replace(/\.(exe|dmg|app|zip)/g, "").replace(/[_-].*/, ""), emuKey = emuName.toLowerCase();
+        const appDirExeGuess = `/Applications/${emuName}.app/Contents/MacOS/${emuName}`;
+        const appDirExeGuessLc = `/Applications/${emuName}.app/Contents/MacOS/${emuKey}`;
+        if (process.platform === 'darwin') {
+            if (fs.existsSync(appDirExeGuess)) emuPath = appDirExeGuess;
+            else if (fs.existsSync(appDirExeGuessLc)) emuPath = appDirExeGuessLc;
+        }
         if(emuKey === "retroarch") {
-            const isOSX = process.platform === 'darwin'
-            const isInOSXAppDir = isOSX && fs.existsSync("/Applications/RetroArch.app/Contents/MacOS/RetroArch");
-            const cores = fileUtil.GetRetroarchCores(emuPath, emuPath.toLowerCase() === "retroarch.app.zip" && isInOSXAppDir);
+            const cores = fileUtil.GetRetroarchCores(emuPath, emuPath.toLowerCase() === "retroarch.app.zip" && (emuPath === appDirExeGuess || emuPath === appDirExeGuessLc));
             cores.forEach(core => {
                 const coreKey = fileUtil.GetRetroarchCoreName(core);
                 const coreName = `RetroArch (${coreKey})`;
