@@ -2,6 +2,7 @@ import config from "@/models/Config";
 import { ipcRenderer } from "electron";
 import fs from "fs";
 import path from "path";
+import os from "os";
 class FileUtil {
     public ShortPath(folder: string): string {
         if(folder.length < 25) { return folder; }
@@ -33,7 +34,7 @@ class FileUtil {
         let corePath = config.GetRetroArchPath();
         if(!corePath) {
             if(isOSX) {
-                corePath = "~/Library/Application Support/RetroArch/cores";
+                corePath = os.homedir() + "/Library/Application Support/RetroArch/cores";
             } else {
                 const retroarchPath = path.dirname(retroarchExePath);
                 corePath = path.join(retroarchPath, "cores");
